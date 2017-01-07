@@ -34,11 +34,10 @@ main()
     
 
 
-
 def get_all_rows(worksheet):
     '''Input: A worksheet file, Output: A list of lists, each list is a row of data from the sheet
         This function takes in a worksheet and outputs every row as an element of a list. (Each one of these elements is also a list)'''
-    print(len(res))
+    res = []
     for i in range(3,len(worksheet.col_values(1)) + 1):
         res.append(worksheet.row_values(i))
     
@@ -46,13 +45,24 @@ def get_all_rows(worksheet):
 
 
 
-
-
-
-
-
-
+def calc_match_reason(listA, listB):
+    '''Input: Two lists, A and B, list A is a list of person A's reasons for doing the hackathon, similarly for list B. Output: A score out of 1, of how well the two people match in this category'''
+    listC = set(listA + listB)
+    total = len(listA) + len(listB)
+    if total == 0:
+        return 0
+    sum = 0.0
+    for val in listC:
+        if (val in listA) and (val in listB):
+            sum += 2
     
+    return (sum/total)
+
+
+
+
+
+
 def match(email):
     '''(str) -> list of str
     Given the email of the first uer, returns list of possible
