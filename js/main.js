@@ -18,7 +18,7 @@ function hideAll(){
 
 function begin(){
 	openOne();
-	$("#hider").hide();
+
 }
 function openOne(){
 	hideAll();
@@ -39,6 +39,13 @@ function openThree(){
 	$("#menu").show();
 	$("#page3").fadeIn(1000);
 	index=3;
+}
+
+function openFour(){
+	hideAll();
+	$("#menu").show();
+	$("#page4").fadeIn(1000);
+	index=4
 }
 
 document.onkeydown = checkKey;

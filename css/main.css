@@ -60,17 +60,32 @@ a{
 	margin-right:10%;    
 	position:absolute;
 	top:175px;
+	width:80%;
+}
+
+#page4{
+	width:100%;
+}
+#page1{
+	width:100%;
+}
+#page2{
+	width:100%;
+}
+#page3{
+	width:100%;
 }
 
 .title{
+	width:100%;
 	text-align: center;
 }
-
 #hider{
 	width: 100%;
 	height: 3000px;
 	color: white;
 }
+
 #menu{
 	width: 80%;
 	margin-top: 10px;
