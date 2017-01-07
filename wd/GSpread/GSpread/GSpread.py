@@ -25,12 +25,8 @@ ws = gc.open_by_url(file_url)
 # open the worksheet
 worksheet = ws.get_worksheet(0)
 
-a_list = worksheet.row_values(2)
-# return the worksheet ready for reading
-
-
-total_list = get_all_rows(worksheet)    
-print(str(total_list))
+# get matches
+match('sadiw@gmail.com')
 
 
 
@@ -93,6 +89,8 @@ def match(email):
 
     # user_score is dictionary containing scores. 
     # calculate interest score
+
+    print(str(user_score))
 
     
 
