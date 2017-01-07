@@ -45,19 +45,18 @@ def get_all_rows(worksheet):
 
 
 
-def calc_match_reason(listA, listB):
+def calc_match(listA, listB):
     '''Input: Two lists, A and B, list A is a list of person A's reasons for doing the hackathon, similarly for list B. Output: A score out of 1, of how well the two people match in this category'''
     listC = set(listA + listB)
     total = len(listA) + len(listB)
     if total == 0:
         return 0
-    sum = 0.0
+    sum = 0
     for val in listC:
         if (val in listA) and (val in listB):
             sum += 2
     
     return (sum/total)
-
 
 
 
