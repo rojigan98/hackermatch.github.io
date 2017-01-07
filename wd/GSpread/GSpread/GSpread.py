@@ -33,8 +33,25 @@ main()
         
     
 
+
+
+def get_all_rows(worksheet):
+    '''Input: A worksheet file, Output: A list of lists, each list is a row of data from the sheet
+        This function takes in a worksheet and outputs every row as an element of a list. (Each one of these elements is also a list)'''
+    print(len(res))
+    for i in range(3,len(worksheet.col_values(1)) + 1):
+        res.append(worksheet.row_values(i))
     
-    
+    return res
+
+
+
+
+
+
+
+
+
     
 def match(email):
     '''(str) -> list of str
