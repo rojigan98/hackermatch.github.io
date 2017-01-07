@@ -1,0 +1,14 @@
+@font-face {
+    font-family: OpenSans;
+    src: url("../open-sans/OpenSans-Light.ttf"); 
+}
+
+body{
+	font-family: OpenSans;
+	align-content: center;
+}
+
+h1{
+	font-family: OpenSans;
+	align-content: center;
+}
