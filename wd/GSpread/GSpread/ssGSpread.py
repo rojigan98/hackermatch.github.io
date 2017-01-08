@@ -125,7 +125,6 @@ def start():
     worksheet = []
     for i in range(2, worksheet_raw.row_count + 1):
         worksheet.append(worksheet_raw.row_values(i))
-    # write total entries in M2
 
     current_team = 1
 
@@ -144,7 +143,6 @@ def start():
     num_parts = 0
     # only consider groups of 4
     num_parts = len(worksheet) - len(worksheet) % 4
-    worksheet_raw.update_acell('M2', str(num_parts))
 
     for i in range(num_parts):
         # if not in team
