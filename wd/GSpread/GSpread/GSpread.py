@@ -108,13 +108,13 @@ def match(email):
             # add email of potential user and score
             reason_score = 0
             type_score = 0
-            print('pass')
+
             # input(str(c_user_list) + ' and p is: '+ str(p_user_list))
     
             reason_score = calc_match(c_user_list,p_user_list);
 
             user_score[user_row[email_index-1]] = calc_match(c_user_list,p_user_list) * reason_multiplier + calc_match(c_user_list_A,p_user_list_A) * type_multiplier
-            print('pass')
+
     # user_score is dictionary containing scores. 
     # calculate interest score
 
