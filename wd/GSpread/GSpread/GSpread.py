@@ -1,4 +1,4 @@
-# v 0.1
+# v 2.3
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -9,9 +9,10 @@ file_url = 'https://docs.google.com/spreadsheets/d/1GH7WE6mUHlc-wH5BGLVIH8zz3Cjn
 users_to_find = 10
 
 # indices of columns in sheet
-reason_index = 8
-email_index = 10
-type_index = 6
+reason_index = 11
+email_index = 3
+type_index = 9
+team_index = 12
 
 # multipliers
 reason_multiplier = 1.5     # multiplier for reason score
@@ -26,17 +27,6 @@ gc = gspread.authorize(credentials)
 ws = gc.open_by_url(file_url)
 # open the worksheet
 worksheet = ws.get_worksheet(0)
-
-
-
-def get_all_rows(worksheet):
-    '''Input: A worksheet file, Output: A list of lists, each list is a row of data from the sheet
-        This function takes in a worksheet and outputs every row as an element of a list. (Each one of these elements is also a list)'''
-    res = []
-    for i in range(3,len(worksheet.col_values(1)) + 1):
-        res.append(worksheet.row_values(i))
-    
-    return res
 
 
 def calc_match(listA, listB):
@@ -66,9 +56,29 @@ def sorting_by_score(dictionary):
     
     new_list.sort()
     new_list.reverse()
+    
 
-    return new_list
+    return new_list[0:3]
 
+
+def call_match(email):
+    if(email in worksheet.col_values(email_index)):
+        ind = worksheet.col_values(email_index).index(email) + 1
+        print('test')
+        print(str(ind))
+        team_scores = match(ind)
+        team = sorting_by_score(team_scores)
+        team.append((-1,ind)) # start here.
+
+        # for each tuple in the list of tuples
+        for tuple in team:
+            # add team number '1' to sheet
+            worksheet.update_cell(tuple[1], team_index,2) # dynamically chnage team number
+
+        # for debugging  
+        input(str(team))
+    else: 
+        print('email does not exist')
 
 def get_all_user_data(worksheet, email):
     '''Input: The excel sheet as worksheet and the email of the user as a string. Output: All data about the user, as a list
@@ -134,49 +144,53 @@ def match(email):
 
     REQ: email exists
     '''
+    # loop through everybody
+    for p in range (2, len(worksheet.col_values(3)) + 1):
+        # if not in team
+        if int(worksheet.cell(p, 12).value) == 0 :
 
-    # row index of the checking user
-    user_ind = worksheet.col_values(email_index).index(email) + 1
+
+            # row index of the checking user
+           # user_ind = worksheet.col_values(email_index).index(email) + 1
+            user_ind = p
 
 
-    # entries not zero based
-    num_entries = worksheet.row_count+1
+            # dictionary for storing email and score
+            user_score = {}
 
-    # dictionary for storing email and score
-    user_score = {}
+            # list of reasons for checking user
+            c_user_row = worksheet.row_values(user_ind)
+            c_user_list = c_user_row[reason_index-1].split(',') # list of reasons
 
-    # list of reasons for checking user
-    c_user_row = worksheet.row_values(user_ind)
-    c_user_list = c_user_row[reason_index-1].split(',') # list of reasons
+            c_user_list_A = [c_user_row[type_index-1]] # list of type
 
-    c_user_list_A = [c_user_row[type_index-1]] # list of type
+            # loop through each row, excluding the row of user
+            for i in range(2, len(worksheet.col_values(3)) + 1):
+                # if user is not checking user
+                if i != user_ind and int(worksheet.cell(i, 12).value) == 0:
+                    # entire row represents the potential user
+                    user_row = worksheet.row_values(i)
 
-    # loop through each row, excluding the row of user
-    for i in range(2, num_entries):
-        # if user is not checking user
-        if i != user_ind:
-            # entire row represents the potential user
-            user_row = worksheet.row_values(i)
+                    # list of reasons for potential user
+                    p_user_list = user_row[reason_index-1].split(',') # list of reason for potential user
+                    p_user_list_A = [user_row[type_index-1]] # list of type for potential user
+                    # add email of potential user and score
+                    reason_score = 0
+                    type_score = 0
 
-            # list of reasons for potential user
-            p_user_list = user_row[reason_index-1].split(',') # list of reason for potential user
-            p_user_list_A = [user_row[type_index-1]] # list of type for potential user
-            # add email of potential user and score
-            reason_score = 0
-            type_score = 0
-
-            # input(str(c_user_list) + ' and p is: '+ str(p_user_list))
+                    # input(str(c_user_list) + ' and p is: '+ str(p_user_list))
     
-            reason_score = calc_match(c_user_list,p_user_list) * reason_multiplier;
-            type_score = calc_match(c_user_list_A,p_user_list_A) * type_multiplier
+                    reason_score = calc_match(c_user_list,p_user_list) * reason_multiplier;
+                    type_score = calc_match(c_user_list_A,p_user_list_A) * type_multiplier
+           
+                    user_score[i] = reason_score + type_score
 
-            user_score[user_row[email_index-1]] = reason_score + type_score
+            print('passed')
+            # user_score is dictionary containing scores. 
+            # calculate interest score
 
-    # user_score is dictionary containing scores. 
-    # calculate interest score
-
-    # return the dictionary matching p_email to sccore
-    return user_score
+            # return the dictionary matching p_email to sccore
+            return user_score
     
 
     
@@ -184,6 +198,10 @@ def match(email):
 
     
     
-# get matches
-scores = match('sadiwali@hotmail.com')
-# filter scores , create group
+
+
+
+#for t in range((len(worksheet.col_values(3)))//4):
+ #   pass 
+    
+# get team
