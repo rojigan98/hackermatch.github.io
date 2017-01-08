@@ -14,23 +14,27 @@
 
 <body onload="begin();">
     <div id="hider">
+        <div id="loading">
+            <h2>Loading...Please Wait a Second</h2>
+            <center><img src="images\gears.gif" /></center>
+        </div>
     </div>
     <div id="header">
         <center>
             <div id="heading">
                 <h1>Hack The Valley</h1>
-                <p>with Hackmatch</p>
+                <p>with the Hackmatch matching system</p>
             </div>
         </center>
         <center>
             <div id="menu">
                 <table style="width:100%">
                     <tr>
-                        <td onclick="openOne();">ABOUT</td>
-                        <td onclick="openTwo();">YOUR TEAM</td>
-                        <td onclick="openThree();">SPONSORS</td>
-                        <td onclick="openFour();">LOCATION</td>
-                        <td onclick="register();">REGISTER</td>
+                        <td onclick="openOne();" class="menuoption">ABOUT</td>
+                        <td onclick="register();" class="menuoption">REGISTER</td>
+                        <td onclick="openTwo();" class="menuoption">YOUR TEAM</td>
+                        <td onclick="openThree();" class="menuoption">SPONSORS</td>
+                        <td onclick="openFour();" class="menuoption">LOCATION</td>
                     </tr>
                 </table>
             </div>
@@ -42,31 +46,32 @@
                 <h2>About Hack The Valley</h2>
             </div>
             <p>
-                Join 500 innovative and creative developers, designers, and creators, for 36 hours of hacking. You'll get access to some of the best hardware and APIs on the market. Plus get to meet some experienced and awesome mentors! All this in just one weekend? I know, it's hard to believe. Remember, you don't need to be a pro to attend. So, if this is your first hackathon we can't wait to expose you to the incomparable world of creation.
+                Join 500 innovative and creative developers, designers, and creators, for 36 hours of hacking. You'll get access to some of the best hardware and APIs on the market. Plus get to meet some experienced and awesome mentors! All this in just one weekend? I know, it's hard to believe. Remember, you don't need to be a pro to attend. So, if this is your first hackathon, we can't wait to expose you to the incomparable world of creation.
             </p>
+            <center><img src="images/hackathonpic.png" height="30%" /></center>
         </div>
 
         <div id="page2">
             <div class="title">
-                <h2>Get Your Team</h2>
+                <h2>Find Your Team (Powered by Hackmatch)</h2>
             </div>
             <center>
-            <div id="inputemail">
-                Email: <input type="text" id="email"  />
-                <button onclick="getTeam()">Get Your Team</button>
-            </div>
+                <div id="inputemail">
+                    Email: <input type="text" id="email" />
+                    <button onclick="getTeam()">Get Your Team</button>
+                </div>
+            </center>
 
-            <div>
-            <br>
+            <div id="errormessage"></div>
             <br>
             <table style="width: 100%">
                 <tr>
-                    <th>First Name</th>
-                    <th>Email</th>
-                    <th>Languages Known</th>
-                    <th>University</th>
-                    <th>Type Of Hack</th>
-                    <th>Focus</th>
+                    <th width="10%">First Name</th>
+                    <th width="15%">Email</th>
+                    <th width="30%">Languages Known</th>
+                    <th width="20%">University</th>
+                    <th width="10%">Type Of Hack</th>
+                    <th width="10">Focus</th>
                 </tr>
                 <tr>
                     <td id="1name"></td>
@@ -85,40 +90,31 @@
                     <td id="2focus"></td>
                 </tr>
                 <tr>
-                   <td id="3name"></td>
+                    <td id="3name"></td>
                     <td id="3email"></td>
                     <td id="3language"></td>
                     <td id="3university"></td>
                     <td id="3typeHack"></td>
                     <td id="3focus"></td>
-
                 </tr>
-
-
-            </div>
-
-
-            <div id="members">
-                
-            </div>
-        </div>
-
-        <div id="page3">
-            <div class="title">
-                <h2>Sponsors</h2>
-            </div>
-            <p>
-                **LIST OF SPONSORS**
-            </p>
-        </div>
-        <div id="page4">
-            <div class="title">
-                <h2>Location</h2>
-            </div>
-            <center>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11521.334771655975!2d-79.19861363272656!3d43.78668837911694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4da71edf433ed%3A0x6b28fdf0d56fdbcf!2sInstructional+Centre%2C+1095+Military+Trail%2C+Toronto%2C+ON!5e0!3m2!1sen!2sca!4v1483818706325" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-            </center>
+            </table>
         </div>
     </div>
+
+    <div id="page3">
+        <div class="title">
+            <h2>Sponsors</h2>
+        </div>
+    </div>
+    <div id="page4">
+        <div class="title">
+            <h2>Location</h2>
+        </div>
+        <center>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11521.334771655975!2d-79.19861363272656!3d43.78668837911694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4da71edf433ed%3A0x6b28fdf0d56fdbcf!2sInstructional+Centre%2C+1095+Military+Trail%2C+Toronto%2C+ON!5e0!3m2!1sen!2sca!4v1483818706325" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </center>
+    </div>
+    </div>
+</body>
 
 </html>

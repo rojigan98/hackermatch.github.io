@@ -17,7 +17,12 @@ function hideAll() {
 }
 
 function begin() {
-    openOne();
+    $("#hider").show();
+    hideAll();
+    $("#menu").show();
+    $("#page1").fadeIn(2000);
+    $("#hider").fadeOut(1000);
+    index = 1;
 
 }
 
@@ -81,6 +86,7 @@ function checkKey(e) {
 }
 
 function getTeam() {
+	$("#errormessage").html("")
     //all objects
     //var email=get email by id
     var obj;
@@ -94,38 +100,42 @@ function getTeam() {
     }, function(res) {
         obj = res.params;
         console.log(obj);
-        var userIndex = 0;
+        var userIndex = -1;
         for (var i = 0; i < 8; i++) {
             var temp = obj.data[i];
             if (targetEmail == temp.Email) {
                 userIndex = i;
             }
         }
-        var othermembers = [];
-        var teamnumber = Math.floor(userIndex / 4);
-        var membernumber = userIndex % 4;
-        var indices = [0, 0, 0];
-        var j = 0;
-        for (var i = 0; i < 3; i++) {
-            if (membernumber == i) {
+        if (userIndex != -1) {
+            var othermembers = [];
+            var teamnumber = Math.floor(userIndex / 4);
+            var membernumber = userIndex % 4;
+            var indices = [0, 0, 0];
+            var j = 0;
+            for (var i = 0; i < 3; i++) {
+                if (membernumber == i) {
+                    j++;
+                }
+                indices[i] = j;
                 j++;
             }
-            indices[i] = j;
-            j++;
-        }
-        for (var i = 0; i < 3; i++) {
-            othermembers.push(obj.data[teamnumber * 4 + indices[i]]);
-        }
-        console.log(othermembers);
-        var tempname, tempemail;
+            for (var i = 0; i < 3; i++) {
+                othermembers.push(obj.data[teamnumber * 4 + indices[i]]);
+            }
+            console.log(othermembers);
+            var tempname, tempemail;
 
-        for (var i = 1; i<4;i++){
-        	$("#"+i+"name").html(othermembers[i-1].Name);
-        	$("#"+i+"email").html(othermembers[i-1].Email);
-        	$("#"+i+"language").html(othermembers[i-1].LanguagesKnown);
-        	$("#"+i+"university").html(othermembers[i-1].University);
-        	$("#"+i+"typeHack").html(othermembers[i-1].TypeOfHack);
-        	$("#"+i+"focus").html(othermembers[i-1].Focus);
+            for (var i = 1; i < 4; i++) {
+                $("#" + i + "name").html("<center>"+othermembers[i - 1].Name+"</center>");
+                $("#" + i + "email").html("<center>"+othermembers[i - 1].Email+"</center>");
+                $("#" + i + "language").html("<center>"+othermembers[i - 1].LanguagesKnown+"</center>");
+                $("#" + i + "university").html("<center>"+othermembers[i - 1].University+"</center>");
+                $("#" + i + "typeHack").html("<center>"+othermembers[i - 1].TypeOfHack+"</center>");
+                $("#" + i + "focus").html("<center>"+othermembers[i - 1].Focus+"</center>");
+            }
+        }else{
+        	$("#errormessage").html("<br/>Unable to find your team (you either opted out of team matching, did not register, or were not accepted).");
         }
 
     });
