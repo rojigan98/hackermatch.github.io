@@ -93,11 +93,11 @@ def get_all_user_data(worksheet, index):
 
 
 def get_positions(worksheet):
-    '''Input: The excel sheet as worksheet Output: All emails and the position associated with them in a dictionary'''
-    new_dict = {}
+    '''Input: The excel sheet as worksheet Output: All indices and the position associated with them in a list (so that index 1 of the list corresponds to index 1 of the worksheet)'''
+    new_list = ["void"]
     for i in range(1, len(worksheet.col_values(3)) + 1):
-        new_dict[worksheet.cell(i,3).value] =  worksheet.cell(i,10).value
-
+        new_list.append(worksheet.cell(i,10).value)
+    
     return new_dict
 
 
