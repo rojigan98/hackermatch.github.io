@@ -14,6 +14,8 @@ email_index = 3
 type_index = 9
 team_index = 12
 
+next_team_num = 0;
+
 # multipliers
 reason_multiplier = 1.5  # multiplier for reason score
 type_multiplier = 1 # multiplier for type category score
@@ -27,7 +29,6 @@ gc = gspread.authorize(credentials)
 ws = gc.open_by_url(file_url)
 # open the worksheet
 worksheet = ws.get_worksheet(0)
-
 
 def calc_match(listA, listB):
     '''Input: Two lists, A and B, list A is a list of person A's reasons for doing the hackathon,
@@ -75,7 +76,7 @@ def call_match(email): #program start
         # for each tuple in the list of tuples
         for tuple in team:
             # add team number '1' to sheet
-            worksheet.update_cell(tuple[1], team_index,2) # dynamically change team number
+            worksheet.update_cell(tuple[1], team_index, next_team_num) # dynamically change team number
 
         # for debugging
         #input(str(team))
@@ -194,6 +195,11 @@ def match(email):
 
             # return the dictionary matching p_email to score
             return user_score
+
+        #updates the global var next_team_num to have the next value of the team number
+        elif int(worksheet.cell(p, 12).value) > next_team_num:
+            next_team_num = int(worksheet.cell(p, 12).value) + 1
+
 
 #for t in range((len(worksheet.col_values(3)))//4):
  #   pass
