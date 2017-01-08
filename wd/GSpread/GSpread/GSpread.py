@@ -2,11 +2,11 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 scope = ['https://spreadsheets.google.com/feeds']
-file_url = 'https://docs.google.com/spreadsheets/d/1pGw_xOqzh0fQ0iv4z2kQDJJDlz5F7zGmKqsonOSQ-Zo/edit?usp=sharing'
+file_url = 'https://docs.google.com/spreadsheets/d/1GH7WE6mUHlc-wH5BGLVIH8zz3CjnSTf3Mx-MHLzr-Jc/edit?usp=sharing'
 
 users_to_find = 10
 
-# factor indexes
+# indices of columns in sheet
 reason_index = 8
 email_index = 10
 type_index = 6
@@ -27,7 +27,6 @@ worksheet = ws.get_worksheet(0)
 
 
 
-
 def get_all_rows(worksheet):
     '''Input: A worksheet file, Output: A list of lists, each list is a row of data from the sheet
         This function takes in a worksheet and outputs every row as an element of a list. (Each one of these elements is also a list)'''
@@ -36,7 +35,6 @@ def get_all_rows(worksheet):
         res.append(worksheet.row_values(i))
     
     return res
-
 
 
 def calc_match(listA, listB):
@@ -55,7 +53,8 @@ def calc_match(listA, listB):
 
 
 def sorting_by_score(dictionary):
-    '''Input: A dictionary of having all people and their associated score, and team. The higher the score the better they match with the user. Output: A list sorted with score in descending order'''
+    '''Input: A dictionary of having all people and their associated score, and team. 
+    The higher the score the better they match with the user. Output: A list sorted with score in descending order'''
     
     #create a list of tuples
     new_list = []
@@ -65,6 +64,7 @@ def sorting_by_score(dictionary):
     
     new_list.sort()
     new_list.reverse()
+
     return new_list
 
 
@@ -108,18 +108,18 @@ def match(email):
             # add email of potential user and score
             reason_score = 0
             type_score = 0
-            print('pass')
+
             # input(str(c_user_list) + ' and p is: '+ str(p_user_list))
     
             reason_score = calc_match(c_user_list,p_user_list);
 
             user_score[user_row[email_index-1]] = calc_match(c_user_list,p_user_list) * reason_multiplier + calc_match(c_user_list_A,p_user_list_A) * type_multiplier
-            print('pass')
+
     # user_score is dictionary containing scores. 
     # calculate interest score
 
-    print(str(user_score))
-
+    # return the dictionary matching p_email to sccore
+    return user_score
     
 
     
@@ -128,4 +128,5 @@ def match(email):
     
     
 # get matches
-match('sadiw@gmail.com')
+scores = match('sadiw@gmail.com')
+# filter scores , create group
