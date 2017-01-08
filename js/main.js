@@ -81,29 +81,16 @@ function checkKey(e) {
 
 }
 
-function listContacts() {
-    var temp = {};
-    temp.bye = 'yo';
-    $.ajax({
-        type: "GET",
-        url: 'http://localhost:8081/listTeam',
-        data: JSON.stringify(temp),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(data) {
-            //data is the array of all the contact objects
-            teammembers = data;
-            var listContent = "";
-            //display the objects on the webpage
-            for (var i = 0; i < 3; i++) {
-                listContent += "<li id=" + i + " class=\"active\" style=\"padding-bottom:10px\" onclick=\"display(this.id)\"><a style=\"background-color:black\">" + contactList[i].name + "</a></li> ";
-            }
-            $("#list").html(listContent);
-        },
-        error: function(msg, url, line) {
-            alert('error trapped in error: function(msg, url, line)');
-            alert('msg = ' + msg + ', url = ' + url + ', line = ' + line);
-
-        }
-    });
+function getTeam() {
+	//all objects
+	//var email=get email by id
+	var obj;
+	blockspring.runParsed("query-public-google-spreadsheet", { "query": "SELECT A, B, C", "url": 
+        "https://docs.google.com/spreadsheets/d/1ZYvcYf_41aghdXRSpg25TKW4Qj9p1Lpz92b1xG-9R1Q/edit?usp=sharing"}, 
+        { "api_key": "br_50064_1fe91fe1478ef990dc8b5e9b4041c2c476670306"}, function(res){  
+            obj=res.params;
+            console.log(obj);
+            //var temp=obj.data[5].Name;
+        });
+	}
 }

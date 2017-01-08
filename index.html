@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <title>HackMatch</title>
     <link rel="stylesheet" href="css/main.css">
-    <script src="bundle.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/server.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.blockspring.com/blockspring.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
 </head>
 
@@ -27,7 +27,7 @@
                 <table style="width:100%">
                     <tr>
                         <td onclick="openOne();">ABOUT</td>
-                        <td onclick="openTwo();">GET TEAM MEMBERS</td>
+                        <td onclick="openTwo();">YOUR TEAM</td>
                         <td onclick="openThree();">SPONSORS</td>
                         <td onclick="openFour();">LOCATION</td>
                         <td onclick="register();">REGISTER</td>
@@ -47,25 +47,20 @@
         </div>
 
         <div id="page2">
+            <div class="title">
+                <h2>Get Your Team</h2>
+            </div>
+            <center>
             <div id="inputemail">
                 <form id="frm1">
                     Email: <input type="text" name="fname"><br>
                 </form>
-                <button onclick="myFunction()">Get Team</button>
-                <span id="outputemailaddress"></p>
+                <button onclick="getTeam()">Get Team</button>
             </div>
+            </span>
 
-            <div id="possiblemembers">
-                <div class="title">
-                    <h2>Suggested Team Members</h2>
-                </div>
-                <ol>
-                    <li id="numberone"></li>
-                    <li id="numbertwo"></li>
-                    <li id="numberthree"></li>
-                    <li id="numberfour"></li>
-                    <li id="numberfive"></li>
-                </ol>
+            <div id="members">
+                
             </div>
         </div>
 
