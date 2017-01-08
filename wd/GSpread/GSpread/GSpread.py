@@ -78,7 +78,7 @@ def call_match(email): #program start
             worksheet.update_cell(tuple[1], team_index,2) # dynamically change team number
 
         # for debugging
-        input(str(team))
+        #input(str(team))
     else:
         print('email does not exist')
 
@@ -201,4 +201,4 @@ def match(email):
 # get team
 
 if __name__ == "__main__":
-    print (call_match("jks@yahoo.ca"))
+    call_match("jks@yahoo.ca")
