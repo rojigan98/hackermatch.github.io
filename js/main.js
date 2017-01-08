@@ -31,6 +31,7 @@ function openTwo(){
 	hideAll();
 	$("#menu").show();
 	$("#page2").fadeIn(1000);
+	$("#possiblemembers").hide();
 	index=2;
 }
 
@@ -78,4 +79,31 @@ function checkKey(e) {
 		}
     }
 
+}
+
+function listContacts() {
+    var temp = {};
+    temp.bye = 'yo';
+    $.ajax({
+        type: "GET",
+        url: 'http://localhost:8081/listTeam',
+        data: JSON.stringify(temp),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(data) {
+            //data is the array of all the contact objects
+            teammembers = data;
+            var listContent = "";
+            //display the objects on the webpage
+            for (var i = 0; i < 3; i++) {
+                listContent += "<li id=" + i + " class=\"active\" style=\"padding-bottom:10px\" onclick=\"display(this.id)\"><a style=\"background-color:black\">" + contactList[i].name + "</a></li> ";
+            }
+            $("#list").html(listContent);
+        },
+        error: function(msg, url, line) {
+            alert('error trapped in error: function(msg, url, line)');
+            alert('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+
+        }
+    });
 }
