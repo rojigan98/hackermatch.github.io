@@ -91,30 +91,39 @@ def final_team_recommendation(dictionary_with_positions, dictionary, user_data):
     ''' NOT TESTED NOT TESTED Input: First input is a dictionary where the name is the key and the associated score is the value. The second input is the position that the user selected on his Google Form. More specifically a dictionary where the key is the person's email and the associated value is the score. Output: A final team recommendation as a list.'''
     sorted_list = sorting_by_score(dictionary)
     user_position = user_data[9]
-    final_team = [sorted_list[0][1]]
-    if user_position == final_team:
+    if user_data[2] != sorted_list[0][1]
+        final_team = [sorted_list[0][1]]
+        init_val = 1
+    else:
+        final_team = [sorted_list[1][1]]
+        init_val = 2
+    if user_position == dictionary_with_positions(final_team[1]):
         same_modifier = True
     else:
         same_modifier = False
     
     if same_modifier == True:
         people_found = 2
-        for i in range(2, len(sorted_list)):
-            if dictionary_with_positions[sorted_list[i][1]] != user_position:
+        for i in range(init_val, len(sorted_list)):
+            if dictionary_with_positions[sorted_list[i][1]] != user_position and sorted_list[i][1] != user_data[2]:
                 final_team.append(sorted_list[i][1])
                 people_found += 1
             if people_found == 4:
                 return final_team
         return final_team
     else:
-        final_team.append(sorted_list[2][1])
-        excess_position = dictionary_with_positions[sorted_list[2][1]]
-        for i in range(3, len(sorted_list)):
-            if dictionary_with_positions[sorted_list[i][1]] != excess_position:
+        if sorted_list[init_val][1] != user_data[2]:
+            final_team.append(sorted_list[init_val][1])
+            start_val = init_val + 1
+        else:
+            final_team.append(sorted_list[init_val + 1][1])
+            start_val = init_val + 2
+        excess_position = dictionary_with_positions[final_team[1]]
+        for i in range(start_val, len(sorted_list)):
+            if dictionary_with_positions[sorted_list[i][1]] != excess_position and sorted_list[i][1] != user_data[2]:
                 final_team.append(sorted_list[i][1])
                 return final_team
         return final_team
-
 
 
 
