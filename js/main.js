@@ -90,6 +90,7 @@ function getTeam() {
     //all objects
     //var email=get email by id
     var obj;
+    var numPeople=0;
     var targetEmail = $("#email").val();
     console.log(email);
     blockspring.runParsed("query-public-google-spreadsheet", {
@@ -98,10 +99,10 @@ function getTeam() {
     }, {
         "api_key": "br_50064_1fe91fe1478ef990dc8b5e9b4041c2c476670306"
     }, function(res) {
-        obj = res.params;
+    	obj = res.params;
         console.log(obj);
         var userIndex = -1;
-        for (var i = 0; i < 11; i++) {
+        for (var i = 0; i < 16; i++) {
             var temp = obj.data[i];
             if (targetEmail == temp.Email) {
                 userIndex = i;
