@@ -84,41 +84,50 @@ function getTeam() {
     //all objects
     //var email=get email by id
     var obj;
-    var targetEmail=$("#email").val();
+    var targetEmail = $("#email").val();
     console.log(email);
     blockspring.runParsed("query-public-google-spreadsheet", {
-        "query": "SELECT A, B, C",
+        "query": "SELECT A, B, C, D, E, F, G ",
         "url": "https://docs.google.com/spreadsheets/d/1ZYvcYf_41aghdXRSpg25TKW4Qj9p1Lpz92b1xG-9R1Q/edit?usp=sharing"
     }, {
         "api_key": "br_50064_1fe91fe1478ef990dc8b5e9b4041c2c476670306"
     }, function(res) {
         obj = res.params;
-        console.log(obj)
-        var userIndex=0;
+        console.log(obj);
+        var userIndex = 0;
         for (var i = 0; i < 8; i++) {
             var temp = obj.data[i];
-            if(targetEmail==temp.Email){
-            	userIndex=i;
+            if (targetEmail == temp.Email) {
+                userIndex = i;
             }
         }
-        console.log(userIndex);
-        var othermembers=[];
-        var teamnumber=userIndex/4;
-        var membernumber=userIndex%4;
-        var indices=[0,0,0];
-        var j=0;
-        for(var i=0; i<3; i++){
-        	if(membernumber==i){
-        		j++;
-        	}
-        	indices[i]=j;
-        	j++;
+        var othermembers = [];
+        var teamnumber = Math.floor(userIndex / 4);
+        var membernumber = userIndex % 4;
+        var indices = [0, 0, 0];
+        var j = 0;
+        for (var i = 0; i < 3; i++) {
+            if (membernumber == i) {
+                j++;
+            }
+            indices[i] = j;
+            j++;
         }
-        for(var i=0; i<3; i++){
-        	othermembers.push(obj.data[teamnumber*4+indices[i]]);
+        for (var i = 0; i < 3; i++) {
+            othermembers.push(obj.data[teamnumber * 4 + indices[i]]);
         }
         console.log(othermembers);
+        var tempname, tempemail;
+
+        for (var i = 1; i<4;i++){
+        	$("#"+i+"name").html(othermembers[i-1].Name);
+        	$("#"+i+"email").html(othermembers[i-1].Email);
+        	$("#"+i+"language").html(othermembers[i-1].LanguagesKnown);
+        	$("#"+i+"university").html(othermembers[i-1].University);
+        	$("#"+i+"typeHack").html(othermembers[i-1].TypeOfHack);
+        	$("#"+i+"focus").html(othermembers[i-1].Focus);
+        }
+
     });
 
 }
-//for(int i=0; i<)
