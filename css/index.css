@@ -1,0 +1,53 @@
+@font-face {
+    font-family: OpenSans;
+    src: url("../open-sans/OpenSans-Light.ttf"); 
+}
+
+@font-face {
+    font-family: OpenSansBold;
+    src: url("../open-sans/OpenSans-Bold.ttf"); 
+}
+
+body{
+    font-family: OpenSans;
+    align-content: center;
+}
+
+h1, p{
+    font-family: OpenSansBold;
+    align-content: center;
+}
+
+h1{
+	font-size:80px;
+}
+
+#welcome{
+	position: absolute;
+    top: 30%;
+    left: 15%;
+    width: 70%;
+    height: 40%;
+    line-height: 20px;
+
+}
+
+#begin{
+	border-color: #32D96C;
+	border-width: 5px;
+	background-color: white;
+    color: black;
+    padding: 5px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+    font-family: OpenSansBold;
+}
+
+body{
+    background-image: url("../images/HomePage.jpg");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
