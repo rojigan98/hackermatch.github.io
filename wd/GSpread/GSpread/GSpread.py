@@ -120,9 +120,10 @@ def match(email):
 
             # input(str(c_user_list) + ' and p is: '+ str(p_user_list))
     
-            reason_score = calc_match(c_user_list,p_user_list);
+            reason_score = calc_match(c_user_list,p_user_list) * reason_multiplier;
+            type_score = calc_match(c_user_list_A,p_user_list_A) * type_multiplier
 
-            user_score[user_row[email_index-1]] = calc_match(c_user_list,p_user_list) * reason_multiplier + calc_match(c_user_list_A,p_user_list_A) * type_multiplier
+            user_score[user_row[email_index-1]] = reason_score + type_score
 
     # user_score is dictionary containing scores. 
     # calculate interest score
@@ -137,5 +138,5 @@ def match(email):
     
     
 # get matches
-scores = match('sadiw@gmail.com')
+scores = match('sadiwali@hotmail.com')
 # filter scores , create group
