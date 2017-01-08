@@ -70,6 +70,13 @@ def sorting_by_score(dictionary):
     return new_list
 
 
+def get_all_user_data(worksheet, email):
+    '''Input: The excel sheet as worksheet and the email of the user as a string. Output: All data about the user, as a list
+        Given the user's email this function will find all info about the user in the worksheet and output it'''
+    for i in range (1, len(worksheet.col_values(3)) + 1):
+        if worksheet.cell(i,3).value == email:
+            return worksheet.row_values(i)
+    return 0
 
 
 
