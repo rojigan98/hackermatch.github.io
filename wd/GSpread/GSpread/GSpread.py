@@ -15,7 +15,7 @@ type_index = 9
 team_index = 12
 
 # multipliers
-reason_multiplier = 1.5     # multiplier for reason score
+reason_multiplier = 1.5  # multiplier for reason score
 type_multiplier = 1 # multiplier for type category score
 
 
@@ -41,27 +41,27 @@ def calc_match(listA, listB):
         if (val in listA) and (val in listB):
             sum += 2
 
-    return (sum/total)
+    return (sum/total) #returns score out of 1
 
 
 def sorting_by_score(dictionary):
-    '''Input: A dictionary of having all people and their associated score, and team. 
+    '''Input: A dictionary of having all people and their associated score, and team.
     The higher the score the better they match with the user. Output: A list sorted with score in descending order'''
-    
+
     #create a list of tuples
     new_list = []
     for key in dictionary.keys():
         new_list.append((dictionary[key], key))
-    
-    
+
+
     new_list.sort()
     new_list.reverse()
-    
+
 
     return new_list[0:3]
 
 
-def call_match(email):
+def call_match(email): #program start
     if(email in worksheet.col_values(email_index)):
         ind = worksheet.col_values(email_index).index(email) + 1
         print('test')
@@ -70,14 +70,16 @@ def call_match(email):
         team = sorting_by_score(team_scores)
         team.append((-1,ind)) # start here.
 
+        #final_team_recommendation(dictionary_with_positions, dictionary, user_data)
+
         # for each tuple in the list of tuples
         for tuple in team:
             # add team number '1' to sheet
-            worksheet.update_cell(tuple[1], team_index,2) # dynamically chnage team number
+            worksheet.update_cell(tuple[1], team_index,2) # dynamically change team number
 
-        # for debugging  
+        # for debugging
         input(str(team))
-    else: 
+    else:
         print('email does not exist')
 
 def get_all_user_data(worksheet, email):
@@ -94,24 +96,30 @@ def get_positions(worksheet):
     new_dict = {}
     for i in range(1, len(worksheet.col_values(3)) + 1):
         new_dict[worksheet.cell(i,3).value] =  worksheet.cell(i,10).value
-    
+
     return new_dict
 
+
 def final_team_recommendation(dictionary_with_positions, dictionary, user_data):
-    ''' NOT TESTED NOT TESTED Input: First input is a dictionary where the name is the key and the associated score is the value. The second input is the position that the user selected on his Google Form. More specifically a dictionary where the key is the person's email and the associated value is the score. Output: A final team recommendation as a list.'''
+    '''NOT TESTED NOT TESTED Input: First input is a dictionary where the name is the key and the associated score
+    is the value. The second input is the position that the user selected on his Google Form. More specifically a
+    dictionary where the key is the person's email and the associated value is the score. Output: A final team
+    recommendation as a list.'''
     sorted_list = sorting_by_score(dictionary)
     user_position = user_data[9]
-    if user_data[2] != sorted_list[0][1]
-        final_team = [sorted_list[0][1]]
+    final_team = []
+    if user_data[2] != sorted_list[0][1]:
+        final_team.append(sorted_list[0][1])
         init_val = 1
     else:
-        final_team = [sorted_list[1][1]]
+        final_team.append(sorted_list[1][1])
         init_val = 2
+
     if user_position == dictionary_with_positions(final_team[1]):
         same_modifier = True
     else:
         same_modifier = False
-    
+
     if same_modifier == True:
         people_found = 2
         for i in range(init_val, len(sorted_list)):
@@ -135,25 +143,20 @@ def final_team_recommendation(dictionary_with_positions, dictionary, user_data):
                 return final_team
         return final_team
 
-
-
 def match(email):
     '''(str) -> list of str
-    Given the email of the first uer, returns list of possible
+    Given the email of the first user, returns list of possible
     users who match with the given user.
 
     REQ: email exists
     '''
     # loop through everybody
     for p in range (2, len(worksheet.col_values(3)) + 1):
-        # if not in team
+        # if not in team (value is 0)
         if int(worksheet.cell(p, 12).value) == 0 :
-
-
             # row index of the checking user
-           # user_ind = worksheet.col_values(email_index).index(email) + 1
+            # user_ind = worksheet.col_values(email_index).index(email) + 1
             user_ind = p
-
 
             # dictionary for storing email and score
             user_score = {}
@@ -179,29 +182,23 @@ def match(email):
                     type_score = 0
 
                     # input(str(c_user_list) + ' and p is: '+ str(p_user_list))
-    
+
                     reason_score = calc_match(c_user_list,p_user_list) * reason_multiplier;
                     type_score = calc_match(c_user_list_A,p_user_list_A) * type_multiplier
-           
+
                     user_score[i] = reason_score + type_score
 
             print('passed')
-            # user_score is dictionary containing scores. 
+            # user_score is dictionary containing scores.
             # calculate interest score
 
-            # return the dictionary matching p_email to sccore
+            # return the dictionary matching p_email to score
             return user_score
-    
-
-    
-
-
-    
-    
-
-
 
 #for t in range((len(worksheet.col_values(3)))//4):
- #   pass 
-    
+ #   pass
+
 # get team
+
+if __name__ == "__main__":
+    print (call_match("jks@yahoo.ca"))
