@@ -29,19 +29,29 @@ ws = gc.open_by_url(file_url)
 worksheet = ws.get_worksheet(0)
 
 
+
+
+
 def infinite():
     '''A function that runs the function start() every 15 seconds'''
     
     import time
     
     
+    def start():
+        print("Pass")
+    
+    
+    
     init_time = time.time()
     
     
     while True:
-        if (time.time() - init_time >= 10):
+        if (time.time() - init_time >= 15):
             init_time = time.time()
             start()
+
+
 
 
 def calc_match(listA, listB):
