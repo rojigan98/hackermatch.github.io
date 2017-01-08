@@ -22,6 +22,11 @@ h2 {
     font-size: 30px;
     text-align: center;
 }
+h3 {
+    font-family: OpenSansLight;
+    font-size: 15px;
+    text-align: center;
+}
 .menuoption {
     text-align: center;
     width: 10%;
@@ -32,6 +37,7 @@ h2 {
     border-radius: 3px;
     cursor: pointer;
 }
+
 a {
     color: blue;
     cursor: pointer;
@@ -124,4 +130,12 @@ p{
 	float: right; 
 	margin-top:-50px;
 	margin-right:10%;
+}
+#getteam{
+	border-radius:6px;
+	background-color: #76323F;
+	color: white;
+	height:30px;
+	font-family: OpenSansLight;
+	font-size:15px;
 }
