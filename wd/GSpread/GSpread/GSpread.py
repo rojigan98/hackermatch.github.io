@@ -82,13 +82,14 @@ def call_match(email): #program start
     else:
         print('email does not exist')
 
-def get_all_user_data(worksheet, email):
-    '''Input: The excel sheet as worksheet and the email of the user as a string. Output: All data about the user, as a list
-        Given the user's email this function will find all info about the user in the worksheet and output it'''
-    for i in range (1, len(worksheet.col_values(3)) + 1):
-        if worksheet.cell(i,3).value == email:
-            return worksheet.row_values(i)
-    return 0
+
+def get_all_user_data(worksheet, index):
+    '''Input: The excel sheet as worksheet and the index of the user as a string. Output: All data about the user, as a list
+        Given the user's index this function will find all info about the user in the worksheet and output it'''
+    if index <= len(worksheet.col_values(3)):
+        return(worksheet.cell(index,3).value)
+    else:
+        return 0
 
 
 def get_positions(worksheet):
