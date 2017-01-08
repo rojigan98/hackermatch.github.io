@@ -37,10 +37,7 @@ def infinite():
     
     import time
     
-    
-    def start():
-        print("Pass")
-    
+   
     
     
     init_time = time.time()
