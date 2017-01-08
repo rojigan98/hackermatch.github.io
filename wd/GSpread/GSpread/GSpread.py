@@ -54,6 +54,20 @@ def calc_match(listA, listB):
     return (sum/total)
 
 
+def sorting_by_score(dictionary):
+    '''Input: A dictionary of having all people and their associated score, and team. The higher the score the better they match with the user. Output: A list sorted with score in descending order'''
+    
+    #create a list of tuples
+    new_list = []
+    for key in dictionary.keys():
+        new_list.append((dictionary[key], key))
+    
+    
+    new_list.sort()
+    new_list.reverse()
+    return new_list
+
+
 
 
 
