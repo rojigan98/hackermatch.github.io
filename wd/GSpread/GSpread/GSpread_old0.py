@@ -23,11 +23,18 @@ type_multiplier = 1 # multiplier for type category score
 credentials = ServiceAccountCredentials.from_json_keyfile_name('cs.json', scope)
 gc = gspread.authorize(credentials)
 
+# get the document
+ws = gc.open_by_url(file_url)
+# worksheet is data type
+worksheet_raw = ws.get_worksheet(0)
+
+# open the worksheet in a 2D list
+worksheet = []
+for i in range(2, worksheet_raw.row_count + 1):
+    worksheet.append(worksheet_raw.row_values(i))
 
 
-
-
-def find_team(worksheet, ind,curr_team,num_parts, worksheet_raw):
+def find_team(worksheet, ind,curr_team,num_parts):
 
     potential_team_list = []
 
@@ -108,26 +115,13 @@ def c_interests(t_A_in):
     return t_A
   
     
-def deb_print(str, worksheet_raw):
+def deb_print(str):
     worksheet_raw.update_acell('M1', str)
 
 
 # run this mainly, finds team for everybody automatically
 def start():
-
-
-    # get the document
-    ws = gc.open_by_url(file_url)
-    # worksheet is data type
-    worksheet_raw = ws.get_worksheet(0)
-
-    # open the worksheet in a 2D list
-    worksheet = []
-    for i in range(2, worksheet_raw.row_count + 1):
-        worksheet.append(worksheet_raw.row_values(i))
-
     current_team = 1
-
     #print('starts')
     # convert empty to zero:
     for i in range(len(worksheet)):
@@ -136,9 +130,9 @@ def start():
         
 
     if(len(worksheet) % 4 != 0):
-        deb_print('Need ' + str(4-len(worksheet) % 4) + ' participants before matching', worksheet_raw)
+        deb_print('Need ' + str(4-len(worksheet) % 4) + ' participants before matching')
     else:
-        deb_print('',worksheet_raw)
+        deb_print('')
     
     num_parts = 0
     # only consider groups of 4
@@ -148,7 +142,7 @@ def start():
         # if not in team
         if int(worksheet[i][team_index]) == 0:
             # find team
-            find_team(worksheet, i, current_team, num_parts, worksheet_raw)
+            find_team(worksheet, i, current_team, num_parts)
             current_team +=1
 
 
@@ -164,10 +158,9 @@ def infinite():
     
     
     while True:
-        if (time.time() - init_time >= 10):
+        if (time.time() - init_time >= 30):
             init_time = time.time()
             start()
-            print('started')
 
 
 
