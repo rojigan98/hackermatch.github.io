@@ -166,7 +166,7 @@ def infinite():
 
 
     while True:
-        if (time.time() - init_time >= 1):
+        if (time.time() - init_time >= 10):
             init_time = time.time()
             start()
             print('started')
