@@ -164,9 +164,9 @@ def infinite():
     
     init_time = time.time()
     
-    
+    #runs an infinite loop to continuously refresh server for demo purposes
     while True:
-        if (time.time() - init_time >= 10):
+        if (time.time() - init_time >= 1):
             init_time = time.time()
             start()
             print('started')
